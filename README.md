@@ -121,8 +121,8 @@ git push -u origin main
 
 ## Link Demo
 
-- **Live Demo**: *(cập nhật sau khi deploy)*
-- **GitHub**: *(cập nhật sau khi đưa lên GitHub)*
+- **Live Demo**: https://silicone-gasket-quote.vercel.app
+- **GitHub**: https://github.com/dovancang93-web/silicone-gasket-quote
 
 ---
 
