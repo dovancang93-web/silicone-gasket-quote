@@ -9,17 +9,29 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 px-4 bg-blue-800 text-white">
+    <section className="py-16 px-4" style={{ background: '#111827' }}>
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6 text-center">
-          Vì Sao Nên Chọn Sản Phẩm Của Chúng Tôi
+        <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: '#C9A227' }}>
+          KTECH
+        </p>
+        <h2 className="text-3xl font-bold mb-3 text-white">
+          Vì Sao Nên Chọn Chúng Tôi
         </h2>
-        <div className="w-16 h-1 bg-blue-300 mx-auto mb-10 rounded-full" />
-        <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+        <div className="w-12 h-0.5 mb-10 rounded-full" style={{ background: '#C9A227' }} />
+        <div className="grid sm:grid-cols-2 gap-4 max-w-3xl">
           {reasons.map((r, i) => (
-            <div key={i} className="flex items-start gap-3 bg-blue-700/50 rounded-xl p-5 border border-blue-600">
-              <span className="text-blue-300 text-xl font-bold mt-0.5">✓</span>
-              <p className="text-blue-100 leading-relaxed">{r}</p>
+            <div
+              key={i}
+              className="flex items-start gap-3 rounded-xl p-5 border"
+              style={{ background: '#1F2937', borderColor: '#374151' }}
+            >
+              <span
+                className="shrink-0 w-5 h-5 rounded flex items-center justify-center text-xs font-bold mt-0.5"
+                style={{ background: '#C9A227', color: '#0F172A' }}
+              >
+                ✓
+              </span>
+              <p style={{ color: '#D1D5DB' }} className="leading-relaxed text-sm">{r}</p>
             </div>
           ))}
         </div>

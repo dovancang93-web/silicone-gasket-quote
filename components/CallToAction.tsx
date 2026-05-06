@@ -1,21 +1,36 @@
 export default function CallToAction() {
   return (
     <section className="py-16 px-4 bg-white">
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-5">
-          Bạn Đang Cần Tìm Gioăng Silicone?
-        </h2>
-        <p className="text-gray-600 text-lg leading-relaxed mb-8">
-          Cho dù là tủ điện, máy móc, dây chuyền sản xuất hay thiết bị công nghiệp —
-          hãy gửi yêu cầu báo giá ngay hôm nay. Chúng tôi sẽ tiếp nhận thông tin,
-          tư vấn sản phẩm phù hợp và phản hồi trong thời gian sớm nhất.
+      <div
+        className="max-w-4xl mx-auto rounded-2xl text-center px-8 py-14"
+        style={{ background: '#0F172A' }}
+      >
+        <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#C9A227' }}>
+          KTECH – Vật liệu kỹ thuật B2B
         </p>
-        <a
-          href="#quote-form"
-          className="inline-block bg-blue-700 text-white font-bold text-lg px-12 py-4 rounded-lg shadow-lg hover:bg-blue-800 transition-colors duration-200"
-        >
-          Gửi yêu cầu báo giá
-        </a>
+        <h2 className="text-3xl font-bold text-white mb-5">
+          Bạn Đang Cần Gioăng Silicone?
+        </h2>
+        <p className="text-lg leading-relaxed mb-8" style={{ color: '#9CA3AF' }}>
+          Cho dù là tủ điện, máy móc, dây chuyền sản xuất hay thiết bị công nghiệp —
+          hãy gửi yêu cầu ngay. KTECH sẽ tư vấn và phản hồi trong thời gian sớm nhất.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <a
+            href="#quote-form"
+            className="inline-block font-bold text-base px-10 py-4 rounded-lg transition-opacity hover:opacity-90"
+            style={{ background: '#C9A227', color: '#0F172A' }}
+          >
+            Gửi yêu cầu báo giá
+          </a>
+          <a
+            href="tel:0921270789"
+            className="inline-block font-medium text-base px-10 py-4 rounded-lg border transition-colors"
+            style={{ borderColor: '#4B5563', color: '#D1D5DB' }}
+          >
+            Gọi: 0921 270 789
+          </a>
+        </div>
       </div>
     </section>
   )
