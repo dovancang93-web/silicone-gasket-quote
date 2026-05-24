@@ -42,3 +42,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code Routine reports (auto-generated)
+.claude/reports/*.log
+.claude/reports/*.md
+!.claude/reports/.gitkeep
