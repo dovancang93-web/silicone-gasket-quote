@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# File tam cua bo dung hoa don (HTML nhung anh base64, rat nang)
+output/*.html

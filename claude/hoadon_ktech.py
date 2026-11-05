@@ -227,10 +227,53 @@ img.qr{{position:absolute;left:490.4pt;top:189.2pt;width:68.8pt;height:68.7pt}}
 {''.join(E)}
 </div></body></html>"""
 
+PREVIEW_CSS = """
+<style id="xem">
+html{--z:1.6}
+body{background:#4a4f55;margin:0;padding:0 0 40px;font-family:Arial,Helvetica,sans-serif}
+#thanh{position:sticky;top:0;z-index:99;background:#23272b;color:#fff;padding:10px 14px;
+display:block;text-align:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+#thanh b{font-size:16px;letter-spacing:.3px}
+#thanh button{font-size:19px;font-weight:700;width:42px;height:42px;margin:0 6px;cursor:pointer;
+border:0;border-radius:8px;background:#3d4348;color:#fff;vertical-align:middle}
+#thanh button:active{background:#5a6168}
+#muc{display:inline-block;min-width:72px;font-variant-numeric:tabular-nums;vertical-align:middle}
+#khung{overflow:auto;padding:18px 10px}
+#sanh{width:calc(595pt * var(--z));height:calc(842pt * var(--z));margin:0 auto}
+.page{transform:scale(var(--z));transform-origin:top left;
+box-shadow:0 6px 28px rgba(0,0,0,.55);background:#fff}
+@media (max-width:700px){#thanh{font-size:13px}}
+</style>"""
+
+PREVIEW_JS = """
+<script>
+var z=1.6;
+function dat(v){z=Math.min(4,Math.max(0.6,Math.round(v*20)/20));
+document.documentElement.style.setProperty('--z',z);
+document.getElementById('muc').textContent=Math.round(z*100)+'%';}
+function vua(){var w=document.getElementById('khung').clientWidth-24;dat(w/(595*96/72));}
+dat(z);
+</script>"""
+
+def preview(html):
+    """Boc file hoa don thanh ban xem tren man hinh, phong to thu nho duoc."""
+    bar = ('<div id="thanh"><b>Hóa đơn nháp KTECH</b> &nbsp;&nbsp; '
+           '<button onclick="dat(z-0.2)">&minus;</button>'
+           '<span id="muc">160%</span>'
+           '<button onclick="dat(z+0.2)">+</button> &nbsp; '
+           '<button style="width:auto;padding:0 14px;font-size:14px" onclick="vua()">Vừa màn hình</button>'
+           '</div><div id="khung"><div id="sanh">')
+    html = html.replace("</head>", PREVIEW_CSS + "</head>")
+    html = html.replace('<body>', '<body>' + bar)
+    html = html.replace('</div></body>', '</div></div></div>' + PREVIEW_JS + '</body>')
+    return html
+
 if __name__ == "__main__":
     data = json.load(open(sys.argv[1], encoding="utf-8")); base = sys.argv[2]
     open(base+".html","w",encoding="utf-8").write(build(data))
     subprocess.run(["node","shot_a4.js", base+".html", base+".png"], check=True)
+    open(base+"_xem.html","w",encoding="utf-8").write(preview(open(base+".html",encoding="utf-8").read()))
+    print("Ban xem (zoom duoc):", base+"_xem.html")
     it=data["items"]
     cong=sum(round(i["sl"]*i["don_gia"],0) for i in it)
     thue=sum(round(round(i["sl"]*i["don_gia"],0)*i.get("vat",8)/100,0) for i in it)
