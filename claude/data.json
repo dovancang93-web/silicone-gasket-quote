@@ -1,8 +1,8 @@
-{"ngay":"05/11/2026","ky_hieu":"1C26TKT","httt":"Chuyển khoản",
+{"ngay":"05/11/2026","ky_hieu":"1C26TKT","httt":"Chuyển khoản","ma_cqt":"",
  "buyer":{"nguoi_mua":"","ten_don_vi":"CÔNG TY TNHH VN 168","mst":"3002155237","ma_ns":"",
-          "dia_chi":"Tổ dân phố Long Sơn, Phường Vũng Áng, Tỉnh Hà Tĩnh, Việt Nam","cccd":"","stk":""},
+          "dia_chi":"Tổ dân phố Long Sơn, Phường Vũng Áng, Tỉnh Hà Tĩnh, Việt Nam.","cccd":"","stk":""},
  "items":[
-  {"ten":"Tấm nhựa PTFE KT 4*1000*1000mm","quy_cach":"","dvt":"Tấm","sl":10,"don_gia":1785600,"vat":8},
-  {"ten":"Tấm nhựa PTFE KT 2*1000*1000mm","quy_cach":"","dvt":"Tấm","sl":25,"don_gia":892800,"vat":8},
-  {"ten":"Tấm nhựa PTFE KT 3*1000*1000mm","quy_cach":"","dvt":"Tấm","sl":10,"don_gia":1339200,"vat":8}
+  {"ten":"Tấm nhựa PTFE KT","quy_cach":"4*1000*1000mm","dvt":"Tấm","sl":10,"don_gia":1785600,"vat":8},
+  {"ten":"Tấm nhựa PTFE KT","quy_cach":"2*1000*1000mm","dvt":"Tấm","sl":25,"don_gia":892800,"vat":8},
+  {"ten":"Tấm nhựa PTFE KT","quy_cach":"3*1000*1000mm","dvt":"Tấm","sl":10,"don_gia":1339200,"vat":8}
  ]}
