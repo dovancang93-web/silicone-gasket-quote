@@ -77,7 +77,8 @@ def vline(x, y0, y1, col=F_BD):
 def en(s):  return f'<i>({s})</i>'          # phan tieng Anh: nghieng 8.9pt
 def nhan(vi, anh): return f'{vi} {en(anh)}:'  # "Nhan (English):" - co dau cach nhu ban goc
 
-def build(d):
+def build(d, nhe=False):
+    """nhe=True: dung anh nen da nen nho, cho ban xem HTML."""
     E.clear()
     it = d["items"]
     for i in it:
@@ -208,6 +209,7 @@ def build(d):
 
     qr = qr_b64(d.get("qr", f'KTECH|0111501770|{d.get("ky_hieu","1C26TKT")}|{ng}|{int(tong)}'))
     G = os.path.join(os.path.dirname(os.path.abspath(__file__)), "mau-goc")
+    sfx = "_nhe" if nhe else ""
     return f"""<!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><style>
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{background:#fff}}
@@ -220,9 +222,9 @@ font-family:'Liberation Serif','Times New Roman',Times,serif;color:#000}}
 img.lg{{position:absolute;left:31pt;top:28.2pt;width:88.7pt;height:68.8pt}}
 img.qr{{position:absolute;left:490.4pt;top:189.2pt;width:68.8pt;height:68.7pt}}
 </style></head><body><div class="page">
-<img class="bg" src="data:image/png;base64,{b64f(G+'/khung.png')}" style="top:0;width:595pt;height:842pt">
-<img class="wm" src="data:image/png;base64,{b64f(G+'/watermark.png')}" style="top:157.9pt;width:594.9pt;height:594.8pt;opacity:.146">
-<img class="lg" src="data:image/png;base64,{b64f(G+'/logo.png')}">
+<img class="bg" src="data:image/png;base64,{b64f(G+'/khung'+sfx+'.png')}" style="top:0;width:595pt;height:842pt">
+<img class="wm" src="data:image/png;base64,{b64f(G+'/watermark'+sfx+'.png')}" style="top:157.9pt;width:594.9pt;height:594.8pt;opacity:.146">
+<img class="lg" src="data:image/png;base64,{b64f(G+'/logo'+sfx+'.png')}">
 <img class="qr" src="data:image/png;base64,{qr}">
 {''.join(E)}
 </div></body></html>"""
@@ -231,10 +233,10 @@ PREVIEW_CSS = """
 <style id="xem">
 html{--z:1.6}
 body{background:#4a4f55;margin:0;padding:0 0 40px;font-family:Arial,Helvetica,sans-serif}
-#thanh{position:sticky;top:0;z-index:99;background:#23272b;color:#fff;padding:10px 14px;
+#thanh{position:sticky;top:0;z-index:99;background:#23272b;color:#fff;padding:8px 10px;
 display:block;text-align:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
 #thanh b{font-size:16px;letter-spacing:.3px}
-#thanh button{font-size:19px;font-weight:700;width:42px;height:42px;margin:0 6px;cursor:pointer;
+#thanh button{font-size:19px;font-weight:700;width:40px;height:36px;margin:4px 5px 0;cursor:pointer;
 border:0;border-radius:8px;background:#3d4348;color:#fff;vertical-align:middle}
 #thanh button:active{background:#5a6168}
 #muc{display:inline-block;min-width:72px;font-variant-numeric:tabular-nums;vertical-align:middle}
@@ -248,20 +250,23 @@ box-shadow:0 6px 28px rgba(0,0,0,.55);background:#fff}
 PREVIEW_JS = """
 <script>
 var z=1.6;
-function dat(v){z=Math.min(4,Math.max(0.6,Math.round(v*20)/20));
+function dat(v){z=Math.min(4,Math.max(0.25,Math.round(v*100)/100));
 document.documentElement.style.setProperty('--z',z);
 document.getElementById('muc').textContent=Math.round(z*100)+'%';}
-function vua(){var w=document.getElementById('khung').clientWidth-24;dat(w/(595*96/72));}
-dat(z);
+function vua(){var w=document.getElementById('khung').clientWidth-22;dat(w/(595*96/72));}
+function tudong(){var w=document.getElementById('khung').clientWidth-22,v=w/(595*96/72);
+dat(v<1.6?v:1.6);}
+tudong(); window.addEventListener('resize',function(){if(!daChinh)tudong();});
+var daChinh=false;
 </script>"""
 
 def preview(html):
     """Boc file hoa don thanh ban xem tren man hinh, phong to thu nho duoc."""
-    bar = ('<div id="thanh"><b>Hóa đơn nháp KTECH</b> &nbsp;&nbsp; '
-           '<button onclick="dat(z-0.2)">&minus;</button>'
+    bar = ('<div id="thanh"><b>Hóa đơn nháp KTECH</b><br> '
+           '<button onclick="daChinh=true;dat(z-0.15)">&minus;</button>'
            '<span id="muc">160%</span>'
-           '<button onclick="dat(z+0.2)">+</button> &nbsp; '
-           '<button style="width:auto;padding:0 14px;font-size:14px" onclick="vua()">Vừa màn hình</button>'
+           '<button onclick="daChinh=true;dat(z+0.15)">+</button> '
+           '<button style="width:auto;padding:0 12px;font-size:13px" onclick="daChinh=true;vua()">Vừa khổ</button>'
            '</div><div id="khung"><div id="sanh">')
     html = html.replace("</head>", PREVIEW_CSS + "</head>")
     html = html.replace('<body>', '<body>' + bar)
@@ -271,8 +276,9 @@ def preview(html):
 if __name__ == "__main__":
     data = json.load(open(sys.argv[1], encoding="utf-8")); base = sys.argv[2]
     open(base+".html","w",encoding="utf-8").write(build(data))
-    subprocess.run(["node","shot_a4.js", base+".html", base+".png"], check=True)
-    open(base+"_xem.html","w",encoding="utf-8").write(preview(open(base+".html",encoding="utf-8").read()))
+    shot = os.path.join(os.path.dirname(os.path.abspath(__file__)), "shot_a4.js")
+    subprocess.run(["node", shot, base+".html", base+".png"], check=True)
+    open(base+"_xem.html","w",encoding="utf-8").write(preview(build(data, nhe=True)))
     print("Ban xem (zoom duoc):", base+"_xem.html")
     it=data["items"]
     cong=sum(round(i["sl"]*i["don_gia"],0) for i in it)
