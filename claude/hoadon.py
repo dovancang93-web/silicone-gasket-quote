@@ -4,7 +4,7 @@ import json, sys, base64, subprocess, io
 import segno
 from border import khung
 
-W, H = 794, 1123
+W = 794
 
 CHU = ["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"]
 def _ba(t, c, d, full):
@@ -53,7 +53,7 @@ def dong(nhan, en, gia_tri, dam=False, lon=False):
     return (f'<div class="ln"><span class="nh">{nhan}</span> <span class="en">({en})</span>:'
             f'<span{cls}> {v}</span></div>')
 
-def build(d):
+def build(d, H=1180):
     it = d["items"]
     for i in it:
         i["tt"] = round(i["sl"] * i["don_gia"], 0)
@@ -103,45 +103,45 @@ def build(d):
 body{{background:#fff}}
 .page{{width:{W}px;height:{H}px;position:relative;
 background:url(data:image/svg+xml;base64,{svg}) no-repeat center/100% 100%;
-font-family:'Times New Roman',Times,serif;font-size:9.4px;color:#000}}
-.in{{position:absolute;left:30px;right:30px;top:26px}}
+font-family:'Times New Roman',Times,serif;font-size:11.3px;color:#000}}
+.in{{position:absolute;left:28px;right:28px;top:24px}}
 .wm{{position:absolute;left:0;right:0;top:46%;text-align:center;font-family:Arial,sans-serif;
-font-size:50px;font-weight:900;color:#2E74B5;opacity:.09;letter-spacing:7px;z-index:0;padding-left:90px}}
+font-size:62px;font-weight:900;color:#2E74B5;opacity:.09;letter-spacing:8px;z-index:0;padding-left:90px}}
 .z{{z-index:1}}
 table{{border-collapse:collapse}}
 .c{{text-align:center}} .r{{text-align:right}} .l{{text-align:left}}
-.hd{{width:734px;table-layout:fixed}} .hd>tbody>tr>td{{vertical-align:top}}
-.tt{{text-align:center;font-size:15.5px;font-weight:bold;letter-spacing:.3px}}
-.tten{{text-align:center;font-size:10.5px;font-style:italic;font-weight:bold;margin-top:1px}}
-.ngay{{text-align:center;font-size:9.6px;font-style:italic;margin-top:3px}}
-.cqt{{text-align:center;font-size:9px;font-style:italic;margin-top:1.5px}}
-.sr{{font-size:9.4px;text-align:left}} .sr td{{padding:1px 0}}
+.hd{{width:738px;table-layout:fixed}} .hd>tbody>tr>td{{vertical-align:top}}
+.tt{{text-align:center;font-size:18.6px;font-weight:bold;letter-spacing:.3px}}
+.tten{{text-align:center;font-size:12.6px;font-style:italic;font-weight:bold;margin-top:1px}}
+.ngay{{text-align:center;font-size:11.5px;font-style:italic;margin-top:3px}}
+.cqt{{text-align:center;font-size:10.8px;font-style:italic;margin-top:1.5px}}
+.sr{{font-size:11.3px;text-align:left}} .sr td{{padding:1px 0}}
 .sr .k{{white-space:nowrap}} .sr .vv{{text-align:right;font-weight:bold;padding-left:8px}}
-.ln{{margin-bottom:1.6px;line-height:1.32}}
+.ln{{margin-bottom:2.2px;line-height:1.34}}
 .en{{font-style:italic}}
-.ten-dv{{font-weight:bold;font-size:11.5px}}
+.ten-dv{{font-weight:bold;font-size:13.8px}}
 .sec{{margin-top:4px}}
-.bq{{width:734px;table-layout:fixed}} .bq>tbody>tr>td{{vertical-align:top;padding:0}}
-.qr{{width:78px;height:78px;display:block}}
-.gd{{width:734px;table-layout:fixed;margin-top:5px;font-size:9.2px}}
-.gd th{{border:.8px solid #2E74B5;padding:2.5px 2px;text-align:center;font-weight:bold;line-height:1.2}}
-.gd th i{{font-weight:normal;font-size:8.2px}}
-.gd td{{border:.8px solid #2E74B5;padding:2.5px 3px;vertical-align:top;line-height:1.25;word-wrap:break-word}}
+.bq{{width:738px;table-layout:fixed}} .bq>tbody>tr>td{{vertical-align:top;padding:0}}
+.qr{{width:88px;height:88px;display:block}}
+.gd{{width:738px;table-layout:fixed;margin-top:6px;font-size:11px}}
+.gd th{{border:.9px solid #2E74B5;padding:3.5px 3px;text-align:center;font-weight:bold;line-height:1.2}}
+.gd th i{{font-weight:normal;font-size:9.7px}}
+.gd td{{border:.9px solid #2E74B5;padding:3.5px 4px;vertical-align:top;line-height:1.25;word-wrap:break-word}}
 .gd .trong td{{height:13px}}
-.sm{{width:734px;table-layout:fixed;margin-top:5px;font-size:9.2px}}
-.sm th{{border:.8px solid #2E74B5;padding:3px;text-align:center;font-weight:bold;line-height:1.2}}
-.sm th i{{font-weight:normal;font-size:8.2px}}
-.sm td{{border:.8px solid #2E74B5;padding:2.6px 4px;height:14px}}
+.sm{{width:738px;table-layout:fixed;margin-top:6px;font-size:11px}}
+.sm th{{border:.9px solid #2E74B5;padding:4px;text-align:center;font-weight:bold;line-height:1.2}}
+.sm th i{{font-weight:normal;font-size:9.7px}}
+.sm td{{border:.9px solid #2E74B5;padding:3.6px 5px;height:17px}}
 .sm td.v{{background:#FFFDF0}}
-.sm td i{{font-size:8.2px}}
-.sm .tong td{{font-size:9.8px}}
-.words{{margin-top:4px;font-size:9.4px}}
+.sm td i{{font-size:9.7px}}
+.sm .tong td{{font-size:11.8px}}
+.words{{margin-top:6px;font-size:11.3px}}
 .words b{{font-style:italic}}
 </style></head><body><div class="page"><div class="wm">KTECH</div><div class="in z">
 
 <table class="hd"><tr>
-<td style="width:92px"><img src="data:image/png;base64,{b64('logo.png')}" style="height:52px"></td>
-<td style="width:474px"><div class="tt">HÓA ĐƠN GIÁ TRỊ GIA TĂNG</div>
+<td style="width:92px"><img src="data:image/png;base64,{b64('logo.png')}" style="height:60px"></td>
+<td style="width:466px"><div class="tt">HÓA ĐƠN GIÁ TRỊ GIA TĂNG</div>
 <div class="tten">(VAT INVOICE)</div>
 <div class="ngay">Ngày <i>(Date)</i> {ng[:2]} tháng <i>(month)</i> {ng[3:5]} năm <i>(year)</i> {ng[6:]}</div>
 <div class="cqt">Mã CQT <i>(Code)</i>: {d.get("ma_cqt","")}</div></td>
@@ -159,7 +159,7 @@ table{{border-collapse:collapse}}
 {dong("Số tài khoản","Bank account","517 576 8888 - Ngân hàng TMCP Quân đội (MB Bank) - CN Thanh Xuân")}
 </div>
 
-<table class="bq sec"><tr><td style="width:640px">
+<table class="bq sec"><tr><td style="width:634px">
 {dong("Họ tên người mua hàng","Buyer", b.get("nguoi_mua",""))}
 {dong("Tên đơn vị","Company's name", b.get("ten_don_vi",""), dam=True)}
 {dong("MST/CCCD chủ hộ","Tax code/Household Head's ID", b.get("mst",""))}
@@ -168,24 +168,24 @@ table{{border-collapse:collapse}}
 {dong("CCCD người mua","Buyer's ID", b.get("cccd",""))}
 <div class="ln"><span class="nh">Hình thức thanh toán</span> <span class="en">(Payment method)</span>: {d.get("httt","TM/CK")}
 <span style="display:inline-block;width:92px"></span><span class="nh">Số tài khoản</span> <span class="en">(Bank account)</span>: {b.get("stk","")}</div>
-</td><td style="width:94px;padding-left:10px"><img class="qr" src="data:image/png;base64,{qr}"></td></tr></table>
+</td><td style="width:104px;padding-left:10px"><img class="qr" src="data:image/png;base64,{qr}"></td></tr></table>
 
 <table class="gd">
 <tr><th style="width:28px">STT<br><i>(No)</i></th>
-<th style="width:298px">Tên hàng hóa, dịch vụ<br><i>(Name of goods and services)</i></th>
-<th style="width:50px">Đơn vị<br>tính <i>(Unit)</i></th>
-<th style="width:56px">Số lượng<br><i>(Quantity)</i></th>
-<th style="width:76px">Đơn giá<br><i>(Unit price)</i></th>
-<th style="width:80px">Thành tiền<br><i>(Amount)</i></th>
-<th style="width:50px">Thuế suất<br>GTGT <i>(VAT rate)</i></th>
-<th style="width:96px">Tiền thuế GTGT<br><i>(VAT Amount)</i></th></tr>
+<th style="width:246px">Tên hàng hóa, dịch vụ<br><i>(Name of goods and services)</i></th>
+<th style="width:54px">Đơn vị<br>tính <i>(Unit)</i></th>
+<th style="width:62px">Số lượng<br><i>(Quantity)</i></th>
+<th style="width:90px">Đơn giá<br><i>(Unit price)</i></th>
+<th style="width:92px">Thành tiền<br><i>(Amount)</i></th>
+<th style="width:56px">Thuế suất<br>GTGT <i>(VAT rate)</i></th>
+<th style="width:106px">Tiền thuế GTGT<br><i>(VAT Amount)</i></th></tr>
 {rows}</table>
 
 <table class="sm">
-<tr><th style="width:300px">Tổng hợp <i>(In summary)</i></th>
+<tr><th style="width:294px">Tổng hợp <i>(In summary)</i></th>
 <th style="width:150px">Thành tiền trước thuế<br>GTGT <i>(Total before VAT)</i></th>
 <th style="width:134px">Tiền thuế GTGT<br><i>(VAT amount)</i></th>
-<th style="width:150px">Cộng tiền thanh<br>toán <i>(Total amount)</i></th></tr>
+<th style="width:160px">Cộng tiền thanh<br>toán <i>(Total amount)</i></th></tr>
 {th}</table>
 
 <div class="words">Số tiền viết bằng chữ <i>(Total amount in words)</i>: <b>{doc_so(tong)}.</b></div>
@@ -194,8 +194,14 @@ table{{border-collapse:collapse}}
 if __name__ == "__main__":
     data = json.load(open(sys.argv[1], encoding="utf-8"))
     base = sys.argv[2]
-    open(base + ".html", "w", encoding="utf-8").write(build(data))
-    subprocess.run(["node", "shot2.js", base + ".html", base + ".png"], check=True)
+    # Luot 1: do chieu cao noi dung thuc te
+    open(base + ".html", "w", encoding="utf-8").write(build(data, 1400))
+    h = int(subprocess.run(["node", "measure.js", base + ".html"],
+                           capture_output=True, text=True, check=True).stdout.strip())
+    # Luot 2: dung lai trang vua khit noi dung
+    open(base + ".html", "w", encoding="utf-8").write(build(data, h + 26))
+    subprocess.run(["node", "shot2.js", base + ".html", base + ".png", str(h + 26)], check=True)
+    print("Chieu cao trang:", h + 26, "px")
     it = data["items"]
     cong = sum(round(i["sl"]*i["don_gia"],0) for i in it)
     thue = sum(round(round(i["sl"]*i["don_gia"],0)*i.get("vat",8)/100,0) for i in it)
